@@ -8,11 +8,12 @@
     tools:context="com.lijiankun24.androidpractice.activity.MainActivity">
 
     <TextView
+        android:id="@+id/tv_start_service"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:layout_height="48dp"
+        android:background="@android:color/holo_blue_light"
         android:gravity="center"
-        android:text="This is MainActivity"
-        android:textColor="@android:color/black"
+        android:text="Start Remote Service"
+        android:textColor="@android:color/white"
         android:textSize="18sp"/>
 </LinearLayout>
