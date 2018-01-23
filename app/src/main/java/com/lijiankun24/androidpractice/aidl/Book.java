@@ -25,6 +25,10 @@ public class Book implements Parcelable {
         name = parcel.readString();
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public int describeContents() {
         return 0;

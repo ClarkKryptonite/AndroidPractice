@@ -12,11 +12,10 @@ import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lijiankun24.androidpractice.R;
+import com.lijiankun24.androidpractice.aidl.Book;
 import com.lijiankun24.androidpractice.aidl.IBookManager;
 import com.lijiankun24.androidpractice.multiprocess.RemoteService;
 import com.lijiankun24.androidpractice.multiprocess.UserManager;
@@ -56,12 +55,26 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.tv_start_service).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                traceViewTest();
+                threadLocalTest();
             }
         });
+    }
 
-        ViewGroup viewGroup;
-        LinearLayout layout;
+    private void threadLocalTest() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ThreadLocal<Book> threadLocal = new ThreadLocal<>();
+                Book book = new Book(100, "一千零一夜");
+                try {
+                    threadLocal.set(book);
+                    Book getBook = threadLocal.get();
+                    L.i("getBook's name is " + getBook.getName());
+                } finally {
+                    threadLocal.remove();
+                }
+            }
+        }).start();
     }
 
     private void traceViewTest() {
